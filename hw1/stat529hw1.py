@@ -1,5 +1,5 @@
 from pylab import *
-from scipy.stats import beta
+from scipy.stats import beta, binom
 fact = math.factorial
 
 def q3():
@@ -56,6 +56,12 @@ def q4c():
 	print amin(abs(diffs))
 	print 'Best a_prior = %d, b_prior = %d' % (best_index[0], best_index[1])
 
+def q4d():
+	# We want the ratio a/b knowing that x = 14
+	c1, c2 = 47, 1
+	print "CDF at 14 =", binom.cdf(14, 20, 0.5)
+	print "c1/(c1+c2) =", c1*1.0/(c2+c1)
+
 	# xx = linspace(0,1,1000)
 	# beta_prior = beta.cdf(xx, a_prior, b_prior, loc=0, scale=1)
 	# beta_posterior = beta.cdf(xx, a_posterior, b_posterior, loc=0, scale=1)
@@ -66,8 +72,26 @@ def q4c():
 	# title('posterior, a = %d, b = %d'%(a_posterior, b_posterior))
 	# show()
 
+def q5():
+	# Generate 10000 w based on posterior distribution
+	# Calculate the loss for each action and do histogram
+	mean = 4 # 2.44
+	std = 2 # 1.56
+	n = 10000
+	ws = normal(mean, std, n)
+	avgloss = zeros(5)
+	for i,(l,u) in enumerate([(-5,-3), (-3,-1), (-1,1), (1,3), (3,5)]):
+		# Find the non-zeros loss region samples
+		loss = 0.0
+		loss += sum(abs(ws[ws<l] - l))
+		loss += sum(abs(ws[ws>=u] - u))
+		avgloss[i] = loss / n
+	print avgloss
+	plot(avgloss,'o')
+	show()
+
 def main():
-	q4a()
+	q5()
 
 if __name__ == '__main__':
 	main()
