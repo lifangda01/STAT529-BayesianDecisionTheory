@@ -63,10 +63,11 @@ def main():
 	hist_int = array([0.45,0.74,1.07,1.22,1.47,1.50,1.48,1.09,0.61,0.36])
 	hist_dom = array([0.55,0.90,1.54,1.59,1.52,1.30,1.04,0.82,0.47,0.25])
 	# alpha, beta = find_best_std_beta_fit(hist_int) # Best fit is a = 1.200000, b = 1.500000
-	# find_best_std_beta_fit(hist_dom) # Best fit is a = 0.900000, b = 1.400000
+	find_best_std_beta_fit(hist_int) # Best std Beta fit is alpha = 1.200000, beta = 1.500000
+	find_best_std_beta_fit(hist_dom) # Best std Beta fit is alpha = 0.900000, beta = 1.400000
 	# find_bayes_credible_region_std_beta(alpha, beta, 0.95) # Bayes credible region is (0.202, 0.717)
 	# find_bayes_credible_region_jeffery(0.95) # Bayes credible region is (0.165, 0.776)
-	find_bayes_credible_region_hist(hist_int, 0.95) # Bayes credible region is (0.062000, 0.937000)
+	# find_bayes_credible_region_hist(hist_int, 0.95) # Bayes credible region is (0.062000, 0.937000)
 
 
 if __name__ == '__main__':
