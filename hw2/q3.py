@@ -33,8 +33,8 @@ def find_best_gamma_fit(hist_data):
 				best_alpha, best_beta = alpha, beta
 				best_P = copy(P)
 	print "Best gamma fit is alpha = %f, beta = %f" % (best_alpha, best_beta) 
-	plot(hist_data, label='data')
-	plot(best_P, label='fit')
+	plot(range(1,8), hist_data, label='data')
+	plot(range(1,8), best_P, label='fit')
 	legend(loc=1)
 	show()
 	return best_alpha, best_beta
@@ -81,9 +81,8 @@ def main():
 	data = array([4,3,5,5,1,3,1,4,3,5,6,2,4,4,3,4,3,4,4,3,4,2,4,4,6,4,5,3,2,3,7,7,2,5,1,3,6,5,7,4,4,3,2,3,6,3,1,2,1,3])
 	hist_data, _ = histogram(data, bins=7)
 	hist_data = array(hist_data, dtype=float)
-	# alpha, beta = find_best_gamma_fit(hist_data) # Best gamma fit is alpha = 2.200000, beta = 0.300000
-	# alpha, beta = 2.2, 0.3
-	# find_bayes_credible_region_gamma(alpha+4, beta/(1+beta), 0.95) # Bayes credible region is (1.050000, 6.950000)
+	alpha, beta = find_best_gamma_fit(hist_data) # Best gamma fit is alpha = 2.200000, beta = 0.300000
+	find_bayes_credible_region_gamma(alpha+4, beta/(1+beta), 0.95) # Bayes credible region is (1.050000, 6.950000)
 	find_bayes_credible_region_hb(0.95) # Bayes credible region is (1.810000, 6.180000)
 
 if __name__ == '__main__':

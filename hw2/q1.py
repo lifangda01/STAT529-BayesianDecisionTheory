@@ -68,7 +68,7 @@ def main():
 	hist_dom = array([0.55,0.90,1.54,1.59,1.52,1.30,1.04,0.82,0.47,0.25])
 	alpha, beta = find_best_gen_beta_fit(hist_int) # Best gen Beta fit is alpha = 5.800000, beta = 6.700000
 	find_bayes_interval(alpha, beta) # Best Bayes interval is (0.180000, 0.630000)
-	# find_bayes_credible_region(alpha, beta, 0.95) # Bayes credible region is (0.060000, 0.930000)
+	find_bayes_credible_region(alpha, beta, 0.95) # Bayes credible region is (0.060000, 0.930000)
 
 if __name__ == '__main__':
 	main()
