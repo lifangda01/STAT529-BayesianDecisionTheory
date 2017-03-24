@@ -53,7 +53,9 @@ def main():
 		array([5.2,4.5,10.5,15.0,5.0,14.9,7.6,8.3,10.8,14.6,15.1,7.0,9.3]),
 		array([14.3,16.2,10.0,13.1,16.9,11.2,10.1,18.3,13.5,15.0,15.1,14.8,15.7,13.2,12.2,13.2]),
 		array([10.5,7.5,4.7,12.5,13.1,13.5,12.2,16.1,9.0,17.9])]
-	get_posterior_gibbs_sampler(X)
+	posteriors = get_posterior_gibbs_sampler(X)
+	hist(posteriors, bins=50)
+	show()
 
 if __name__ == '__main__':
 	main()
