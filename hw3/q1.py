@@ -11,7 +11,7 @@ def invgamma_rvs(alpha, beta, N=1):
 		Return samples of the custom inverse Gamma RV.
 	'''
 	r = arange(0,20.01,0.01)
-	gamma_pdf = get_gamma_pdf(r, 6, 0.05)
+	gamma_pdf = get_gamma_pdf(r, alpha, beta)
 	gamma_pdf = gamma_pdf / sum(gamma_pdf)
 	if N == 1:
 		return 1. / choice(r, p=gamma_pdf)
@@ -23,6 +23,7 @@ def get_posterior_samples_gibbs(X):
 		Use Gibbs sample to generate posterior samples for A3Q1.
 		X is a list of arrays for each diet.
 	'''
+	N = 20000
 	# Some preprocessing
 	X_num = array([1.0*len(X[i]) for i in range(5)])
 	X_mean = array([mean(X[i]) for i in range(5)])
@@ -31,10 +32,10 @@ def get_posterior_samples_gibbs(X):
 	tau2 = invgamma_rvs(6, 0.05)
 	sigma2_i = invgamma_rvs(13.1, 0.0083)
 	# Posteriors, each column represents one diet
-	theta_ij = zeros((2000,5))
+	theta_ij = zeros((N,5))
 	theta_ij[0] = sqrt(tau2)*randn(5) + beta
 	# Generating loop
-	for j in range(1,2000):
+	for j in range(1,N):
 		theta_i = theta_ij[j-1]
 		beta = sqrt(tau2*4/(tau2+20))*randn() + (tau2*12+5*4*mean(theta_i)) / (tau2+5*4)
 		tau2 = invgamma_rvs(2.5 + 6, 2*0.05 / (2 + 0.05*sum((theta_i-beta)**2)))
