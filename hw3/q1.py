@@ -48,9 +48,10 @@ def get_posterior_samples_gibbs(X):
 		theta_ij[j] = theta_i
 	# Discard the first 500 to minimize the influence of the intial guess
 	theta_ij = theta_ij[500:]
-	# hist(theta_ij, bins=50, label=["diet %d"%(i) for i in range(1,6)])
-	# legend()
-	# show()
+	figure()
+	hist(theta_ij, bins=50, label=["diet %d"%(i) for i in range(1,6)])
+	legend()
+	show()
 	return theta_ij
 
 def main():
@@ -77,7 +78,7 @@ def main():
 		P_b[i] = sum(posteriors[:,1] >= posteriors[:,2] + b) * 1.0 / posteriors.shape[0]
 	print "P_b:", P_b
 	# Q1c
-	P_2 = sum(posteriors[:,1] >= 14) / posteriors.shape[0]
+	P_2 = sum(posteriors[:,1] >= 14) * 1.0 / posteriors.shape[0]
 	temp = posteriors[:,1][posteriors[:,2] <= 10] # P(theta2 | theta3 <= 10)
 	P_23 = sum(temp >= 14) * 1.0 / temp.shape[0]
 	print "P(theta2 >= 14 | theta3 <= 10):", P_23
