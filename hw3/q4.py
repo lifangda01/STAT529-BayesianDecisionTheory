@@ -23,7 +23,7 @@ def get_beta_tau2_posterior_samples_MCMC(X, sigma2, n):
 	'''
 		Get the posterior samples for beta and tau2
 	'''
-	N = 20000
+	N = 20000	
 	# Posteriors before selection
 	beta_j = zeros(N)
 	tau2_j = zeros(N)
@@ -70,7 +70,7 @@ def main():
 	rv = normal()
 	for b in [0, 1, 3, 5]:
 		Ps = rv.cdf( (m2 - m3 - b) / (sigma2*2 + v2*2) )
-		print "For b = %d, P = %f" % (b, mean(Ps))
+		print "For b = %d, P = %.3f" % (b, mean(Ps))
 
 if __name__ == '__main__':
 	main()
