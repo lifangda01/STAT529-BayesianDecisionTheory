@@ -34,8 +34,8 @@ def get_beta_tau2_posterior_samples_MCMC(X, sigma2, n):
 	j = 1
 	while j < N:
 		# Generate new sample
-		beta = gamma_rvs(2.5, 2)
-		tau2 = randn()*2 + 12
+		beta = randn()*2 + 12
+		tau2 = gamma_rvs(2.5, 2)
 		# Determine whether to keep
 		numerator = (randn()*sqrt(sigma2/n+tau2) + beta) * (randn()*sqrt(sigma2/n+tau2) + beta)
 		denominator = (randn()*sqrt(sigma2/n+tau2_j[j-1]) + beta_j[j-1]) * (randn()*sqrt(sigma2/n+tau2_j[j-1]) + beta_j[j-1])
@@ -69,7 +69,7 @@ def main():
 	v2 = (sigma2*tau2_post/n) / (sigma2/n + tau2_post)
 	rv = normal()
 	for b in [0, 1, 3, 5]:
-		Ps = rv.cdf( (m2 - m3 - b) / (sigma2*2 + v2*2) )
+		Ps = rv.cdf( (m2 - m3 - b) / sqrt(sigma2*2 + v2*2) )
 		print "For b = %d, P = %.3f" % (b, mean(Ps))
 
 if __name__ == '__main__':
